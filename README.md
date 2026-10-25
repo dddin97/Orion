@@ -1,16 +1,51 @@
-# React + Vite
+# ORION ShowMarket
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+ShowMarket adalah showroom digital untuk memperkenalkan lini usaha ORION.Ltd:
 
-Currently, two official plugins are available:
+- **APP — ORITLE Apparel:** apparel dan sablon custom.
+- **SND — iQIFI Audio:** perangkat audio dan elektronik.
+- **ASM — Audio System Assembly:** konsultasi dan perencanaan rakit sound system custom.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Tagline: **Raise your creativity. Create your history.**
+Brand line: **The Sky Hunter.**
 
-## React Compiler
+## Teknologi
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- CSS responsif tanpa dependensi UI tambahan
 
-## Expanding the Oxlint configuration
+## Menjalankan proyek lokal
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Pastikan Node.js dan npm sudah terpasang, lalu jalankan dari direktori proyek:
+
+```bash
+npm install
+npm run dev
+```
+
+Untuk memeriksa build produksi:
+
+```bash
+npm run build
+npm run preview
+```
+
+## Status prototype
+
+Versi ini adalah fondasi UI/UX showroom satu halaman. Navigasi, tautan sumber mitra, tampilan responsif, toggle tema, informasi layanan, dan kontak email telah disiapkan. Ini belum merupakan sistem e-commerce penuh dan belum memiliki backend.
+
+Informasi produk, spesifikasi, harga jual ORION, stok, testimoni, portofolio, nomor WhatsApp lengkap, tautan toko resmi ORITLE/iQIFI, alamat detail, serta Google Maps perlu diisi atau diverifikasi sebelum dipublikasikan. Jangan menganggap harga pada sumber mitra sebagai harga jual ORION. Gunakan foto, logo, video, dan materi promosi pihak lain hanya setelah hak penggunaan atau izinnya dipastikan.
+
+## Sumber referensi
+
+- Cititex: https://cititex.com/
+- New States Apparel: https://shopee.co.id/newstatesapparelofficial
+- ACR: https://acrspeaker.com/
+- Legacy: https://www.legacy.us.com/
+- JIC: https://jicspeaker.com/
+- Betavo: https://www.betavoaudio.com/
+- Ashley Pro Audio: https://www.ashleyproaudio.com/
+- Fest by Brewog: https://shopee.co.id/brewog.fest_indonesia
+
+Tautan ini ditampilkan sebagai sumber referensi yang disediakan dalam brief proyek, bukan sebagai pernyataan bahwa semua aset merek telah mendapat izin untuk digunakan pada website.
