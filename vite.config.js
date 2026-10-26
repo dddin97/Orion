@@ -1,7 +1,8 @@
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 
-// https://vite.dev/config/
+// React handles JSX and Fast Refresh; Tailwind v4 is processed by its Vite plugin.
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
 })

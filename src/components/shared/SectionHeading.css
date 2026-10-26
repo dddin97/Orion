@@ -1,0 +1,8 @@
+/* Reusable section title styles, usable outside the homepage stylesheet. */
+.section-heading { max-width: 700px; }
+.eyebrow { display: inline-block; color: var(--accent, var(--sm-color-orange)); font: 500 9px/1.5 var(--mono, var(--sm-font-mono)); letter-spacing: .15em; text-transform: uppercase; }
+.section-heading h2 { margin: 16px 0 14px; font: 700 clamp(31px, 4vw, 49px)/1.14 var(--heading, var(--sm-font-heading)); letter-spacing: -.06em; }
+.section-heading h2 em { color: var(--accent, var(--sm-color-orange)); font-style: normal; }
+.section-heading p { max-width: 570px; margin: 0; color: var(--muted, var(--sm-color-muted)); font-size: 13px; line-height: 1.85; }
+.section-heading-light h2 { margin-top: 16px; }
+@media (max-width: 560px) { .section-heading h2 { font-size: 33px; } .section-heading p { font-size: 11px; } }
