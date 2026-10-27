@@ -1,35 +1,32 @@
-# Menerapkan ShowMarket Phase 4 ke repository
+# Cara menerapkan overlay Fase 5
 
-Paket Phase 4 adalah overlay di atas fondasi Phase 3. ZIP ini tidak membawa folder `.git` dan tidak melakukan push otomatis.
+Paket ini hanya berisi file overlay yang perlu ditambahkan/diganti, bukan clone penuh repository. Satu pengecualian adalah `src/App.jsx`: versi branch publik yang berhasil diperiksa masih merender `HomePage` langsung, sehingga file ini diperbarui untuk menggunakan `AppRoutes` dan mengaktifkan routing.
 
-1. Pastikan semua perubahan yang sudah ada di repository lokal di-commit atau di-backup.
-2. Ekstrak ZIP ke folder sementara. Buka folder `orion-project/`, lalu salin **isinya** ke root repository Orion lokal—jangan membuat folder `orion-project` bersarang. Tinjau diff dan jangan timpa perubahan lokal yang belum di-commit tanpa membandingkannya.
-3. Dari root repository, jalankan:
+1. Pastikan Fase 4 sudah di-commit dan working tree Git Anda bersih (`git status`).
+2. Unduh dan ekstrak ZIP ini di folder sementara.
+3. Salin isi folder `orion-project` ke root clone repository Orion Anda. Overlay ini tidak menyertakan `.git`, `package.json`, `package-lock.json`, `main.jsx`, `AppRoutes.jsx`, layout, navbar/footer, atau halaman beranda.
+4. Tinjau perubahan dengan `git diff --stat` dan `git diff` sebelum menguji.
+5. Jalankan:
 
-   ```bash
-   npm install
-   npm run dev
-   ```
+```bash
+npm install
+npm run dev
+```
 
-4. Uji setiap URL yang tercantum pada `docs/PHASE-4-ROUTING.md`, termasuk detail dinamis `/app/produk/produk-contoh` dan `/portofolio/proyek-contoh`, navigasi header/footer, breadcrumb, tombol kembali, mode tema, dan menu pada layar kecil.
-5. Jalankan pemeriksaan:
+6. Uji URL dan alur pada `docs/PHASE-5-SHOWROOM.md`.
+7. Jalankan pemeriksaan:
 
-   ```bash
-   npm run lint
-   npm run build
-   ```
+```bash
+npm run lint
+npm run build
+```
 
-6. Jika uji lokal lolos, commit dan push:
+8. Jika semuanya lolos, commit dan push:
 
-   ```bash
-   git add .
-   git commit -m "feat: add ShowMarket page layout and routing"
-   git push
-   ```
+```bash
+git add .
+git commit -m "feat: complete ShowMarket public showroom pages"
+git push
+```
 
-## Perhatian
-
-- Jangan menghapus atau mengubah folder `.git` repository lokal.
-- Paket tidak menyertakan `node_modules`.
-- Produk, harga, stok, spesifikasi, portofolio, alamat detail, dan nomor WhatsApp lengkap belum ditambahkan tanpa verifikasi.
-- Direct URL pada hosting produksi membutuhkan konfigurasi SPA fallback. Itu dibahas pada Fase 8 deployment.
+Jika ada perubahan lokal pada file yang sama, gabungkan secara manual terlebih dahulu; jangan langsung menimpa tanpa meninjau diff.
