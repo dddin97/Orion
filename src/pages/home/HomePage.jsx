@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import SiteHeader from '../../components/shared/SiteHeader.jsx'
-import SiteFooter from '../../components/shared/SiteFooter.jsx'
+import { Link } from 'react-router'
 import SectionHeading from '../../components/shared/SectionHeading.jsx'
 import './HomePage.css'
 
@@ -16,7 +14,7 @@ const businessLines = [
     number: '01',
     accent: 'orange',
     action: 'Jelajahi sumber apparel',
-    href: '#partners-apparel',
+    href: '/app',
   },
   {
     id: 'audio',
@@ -29,7 +27,7 @@ const businessLines = [
     number: '02',
     accent: 'silver',
     action: 'Jelajahi sumber audio',
-    href: '#partners-audio',
+    href: '/snd',
   },
   {
     id: 'assembly',
@@ -42,7 +40,7 @@ const businessLines = [
     number: '03',
     accent: 'blue',
     action: 'Lihat alur layanan',
-    href: '#how-it-works',
+    href: '/asm',
   },
 ]
 
@@ -81,22 +79,8 @@ function PartnerCard({ partner }) {
 }
 
 function HomePage() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [lightMode, setLightMode] = useState(false)
-
-  const closeMenu = () => setMenuOpen(false)
-
   return (
-    <div className={`site-shell${lightMode ? ' light-mode' : ''}`}>
-      <SiteHeader
-        menuOpen={menuOpen}
-        onMenuToggle={() => setMenuOpen((open) => !open)}
-        onNavigate={closeMenu}
-        lightMode={lightMode}
-        onToggleTheme={() => setLightMode((current) => !current)}
-      />
-
-      <main>
+    <main>
         <section className="hero-section" id="home">
           <div className="hero-grid-lines" aria-hidden="true" />
           <div className="hero-copy">
@@ -153,7 +137,7 @@ function HomePage() {
                   <h3>{business.name}</h3>
                   <p>{business.description}</p>
                   <div className="business-tags">{business.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-                  <a className="text-link" href={business.href}>{business.action} <span aria-hidden="true">↗</span></a>
+                  <Link className="text-link" to={business.href}>{business.action} <span aria-hidden="true">↗</span></Link>
                 </div>
               </article>
             ))}
@@ -225,10 +209,7 @@ function HomePage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <SiteFooter />
-    </div>
+    </main>
   )
 }
 

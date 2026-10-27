@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import './ui.css'
 
 /** Shared accessible button/link primitive. Use href for navigation and onClick for actions. */
@@ -23,19 +24,22 @@ export default function Button({
   const content = <>{loading && <span className="sm-button__spinner" aria-hidden="true" />}{children}</>
 
   if (href) {
+    const isInternal = href.startsWith('/')
+    const LinkComponent = isInternal ? Link : 'a'
+    const routeProps = isInternal ? { to: href } : { href: disabled ? undefined : href }
     return (
-      <a
+      <LinkComponent
         className={classes}
-        href={disabled ? undefined : href}
-        target={target}
-        rel={target === '_blank' ? (rel || 'noreferrer') : rel}
+        {...routeProps}
+        target={isInternal ? undefined : target}
+        rel={!isInternal && target === '_blank' ? (rel || 'noreferrer') : rel}
         aria-disabled={disabled || loading ? 'true' : undefined}
         aria-busy={loading || undefined}
         onClick={disabled || loading ? (event) => event.preventDefault() : onClick}
         {...props}
       >
         {content}
-      </a>
+      </LinkComponent>
     )
   }
 

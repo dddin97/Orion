@@ -1,2 +1,3 @@
 # Catalog pages
-Katalog, pencarian, filter, dan detail produk direncanakan pada Fase 5–6. Data produk hanya boleh dipublikasikan setelah sumber dan status verifikasinya dicatat.
+
+`CatalogPage.jsx` menyediakan kerangka katalog untuk APP/SND dan layanan ASM. `ProductDetailPage.jsx` menangani rute detail produk APP/SND serta detail layanan ASM. Konten produk nyata masih menunggu verifikasi sumber, spesifikasi, harga, ketersediaan, dan izin media.
