@@ -1,4 +1,4 @@
-import { ArrowUpRight, Clock3, Instagram, Mail, MapPin, MessageCircle, ShieldCheck } from 'lucide-react'
+import { ArrowUpRight, Clock3, AtSign, Mail, MapPin, MessageCircle, ShieldCheck } from 'lucide-react'
 import PageIntro from '../../components/shared/PageIntro.jsx'
 import '../../styles/phase-5-showroom.css'
 
@@ -19,7 +19,7 @@ export default function ContactPage() {
           <div className="sm5-contact-item"><span className="sm5-contact-item__icon"><MapPin size={19} aria-hidden="true" /></span><div><span>Area layanan ASM</span><p>Ngronggot, Nganjuk · Ngajum, Malang</p><small>Jawa Timur; alamat detail dan Google Maps belum tersedia.</small></div></div>
         </div></div>
       </section>
-      <section className="sm5-social-band"><div className="sm5-container"><div className="sm5-section-heading"><div><span className="sm5-eyebrow">SOCIAL CHANNELS</span><h2>Ikuti kanal usaha.</h2></div><p>Tautan berikut berasal dari brief proyek. Kanal Facebook, TikTok, dan toko marketplace ShowMarket belum ditautkan karena URL final belum dipastikan.</p></div><div className="sm5-social-grid">{socialLinks.map((social) => <a href={social.href} key={social.handle} target="_blank" rel="noreferrer"><Instagram size={20} aria-hidden="true" /><span><strong>{social.handle}</strong><small>{social.label}</small></span><ArrowUpRight size={16} aria-hidden="true" /></a>)}</div></div></section>
+      <section className="sm5-social-band"><div className="sm5-container"><div className="sm5-section-heading"><div><span className="sm5-eyebrow">SOCIAL CHANNELS</span><h2>Ikuti kanal usaha.</h2></div><p>Tautan berikut berasal dari brief proyek. Kanal Facebook, TikTok, dan toko marketplace ShowMarket belum ditautkan karena URL final belum dipastikan.</p></div><div className="sm5-social-grid">{socialLinks.map((social) => <a href={social.href} key={social.handle} target="_blank" rel="noreferrer"><AtSign size={20} aria-hidden="true" /><span><strong>{social.handle}</strong><small>{social.label}</small></span><ArrowUpRight size={16} aria-hidden="true" /></a>)}</div></div></section>
       <section className="sm5-container sm5-cta-wrap"><div className="sm5-cta-band"><div><span className="sm5-eyebrow">BEFORE YOU CONTACT</span><h2>Informasi apa yang baik disiapkan?</h2><p>Untuk APP: jenis produk, jumlah, ukuran, dan kebutuhan custom. Untuk SND: tujuan penggunaan dan tipe perangkat. Untuk ASM: lokasi, cakupan penggunaan, serta kisaran anggaran.</p></div><a className="sm5-button sm5-button--light" href="mailto:orion.ltd@gmail.com?subject=Kebutuhan%20ShowMarket">Siapkan pertanyaan<Mail size={16} aria-hidden="true" /></a></div></section>
     </main>
   )
