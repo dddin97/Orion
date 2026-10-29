@@ -1,31 +1,17 @@
-# Menerapkan Fase 2 ke repository GitHub
+# Menerapkan ShowMarket Phase 3 ke repository
 
-Paket ini tidak menyertakan folder `.git`, jadi riwayat repository Anda tetap aman.
+Paket ini merupakan overlay di atas fondasi `Orion_ShowMarket_Phase2_Setup.zip`, bukan clone Git dan tidak berisi folder `.git`.
 
-1. Buka atau clone repository `https://github.com/dddin97/Orion.git` dan pastikan perubahan Anda sebelumnya sudah di-commit.
-2. Ekstrak isi ZIP Fase 2 ke folder repository, setujui penggantian file yang namanya sama. Jangan menghapus folder `.git`.
-3. Dari terminal di root repository, jalankan:
+1. Backup atau commit perubahan lokal Anda terlebih dahulu.
+2. Ekstrak ZIP ke folder sementara. Masuk ke folder hasil ekstrak `orion-project/`, lalu salin **isinya** (bukan folder `orion-project` sebagai subfolder baru) ke root repository Orion lokal. Izinkan file dengan nama sama diperbarui.
+3. Dari root proyek jalankan `npm install`, `npm run lint`, dan `npm run build`.
+4. Periksa beranda pada `npm run dev` di desktop dan layar kecil.
+5. Jika semua pemeriksaan lulus, commit perubahan:
 
-   ```bash
-   npm install
-   npm run dev
-   ```
+```bash
+git add .
+git commit -m "feat: add ShowMarket design system and reusable UI kit"
+git push
+```
 
-4. Setelah website tampil, hentikan server dengan `Ctrl+C`, lalu jalankan:
-
-   ```bash
-   npm run lint
-   npm run build
-   ```
-
-5. Jika semua perintah berhasil, periksa perubahan dengan `git status`, lalu commit dan push:
-
-   ```bash
-   git add .
-   git commit -m "chore: configure ShowMarket phase 2 setup"
-   git push
-   ```
-
-`npm install` akan menyelaraskan atau membuat `package-lock.json` berdasarkan dependensi Fase 2. Jangan menjalankan `npm ci` sebelum lockfile terselaraskan.
-
-Jika build atau lint menghasilkan error di komputer Anda, salin teks error lengkap agar dapat diperbaiki sebelum masuk Fase 3.
+Jika Anda sudah mengubah file yang sama sejak commit Fase 2, jangan timpa tanpa meninjau diff. Bandingkan perubahan di `src/pages/home/HomePage.jsx`, `src/index.css`, dan `README.md` terlebih dahulu.

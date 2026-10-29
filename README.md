@@ -61,7 +61,8 @@ src/
 ├── routes/
 └── styles/
 docs/
-└── PHASE-2-SETUP.md
+├── PHASE-2-SETUP.md
+└── PHASE-3-DESIGN-SYSTEM.md
 ```
 
 Folder sudah disiapkan berdasarkan target arsitektur roadmap. Tidak semua modul diimplementasikan pada fase ini.
@@ -70,7 +71,7 @@ Folder sudah disiapkan berdasarkan target arsitektur roadmap. Tidak semua modul 
 
 - **Fase 1 — Perencanaan dan fondasi:** acuan dari brief serta Prototype v1.
 - **Fase 2 — Setup proyek:** React + Vite, Tailwind, React Router, Lucide React, ESLint, dan struktur folder telah dikonfigurasi.
-- **Fase 3 — Design system dan komponen:** berikutnya.
+- **Fase 3 — Design system dan komponen:** tokens, shared header/footer, primitives UI, kartu usaha/produk, dan 20 placeholder media telah disiapkan; lihat `docs/PHASE-3-DESIGN-SYSTEM.md`.
 - Fase 4–10 mengikuti roadmap `Orion Web`.
 
 ## Sumber mitra

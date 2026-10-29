@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import { Moon, Sun } from 'lucide-react'
+import SiteHeader from '../../components/shared/SiteHeader.jsx'
+import SiteFooter from '../../components/shared/SiteFooter.jsx'
+import SectionHeading from '../../components/shared/SectionHeading.jsx'
 import './HomePage.css'
 
 const businessLines = [
@@ -58,27 +60,6 @@ const audioPartners = [
   { name: 'Fest by Brewog', description: 'Referensi kanal audio dan produk', links: [{ label: 'Shopee', href: 'https://shopee.co.id/brewog.fest_indonesia' }, { label: 'Fest IG', href: 'https://www.instagram.com/brewogfestindonesia/' }, { label: 'Brewog Audio', href: 'https://www.instagram.com/brewogaudio/' }, { label: 'Huper Audio', href: 'https://www.instagram.com/brewoghuperaudio/' }, { label: 'Betavo ID', href: 'https://www.instagram.com/brewogbetavo_indonesia/' }, { label: 'Ashley ID', href: 'https://www.instagram.com/brewogashleynusantara/' }] },
 ]
 
-function OrbitalMark() {
-  return (
-    <svg className="orbital-mark" viewBox="0 0 44 44" role="img" aria-label="Logo konseptual ORION">
-      <circle cx="22" cy="22" r="15" fill="none" stroke="currentColor" strokeWidth="1.4" opacity=".6" />
-      <ellipse cx="22" cy="22" rx="20" ry="8" transform="rotate(-36 22 22)" fill="none" stroke="currentColor" strokeWidth="1.4" />
-      <circle cx="32.5" cy="10.5" r="3.2" fill="var(--accent)" />
-      <circle cx="22" cy="22" r="4.2" fill="currentColor" />
-    </svg>
-  )
-}
-
-function SectionHeading({ eyebrow, title, description, light = false }) {
-  return (
-    <div className={`section-heading${light ? ' section-heading-light' : ''}`}>
-      <span className="eyebrow">{eyebrow}</span>
-      <h2>{title}</h2>
-      {description && <p>{description}</p>}
-    </div>
-  )
-}
-
 function PartnerCard({ partner }) {
   return (
     <article className="partner-card">
@@ -107,35 +88,13 @@ function HomePage() {
 
   return (
     <div className={`site-shell${lightMode ? ' light-mode' : ''}`}>
-      <div className="announcement-bar">
-        <span className="announcement-dot" />
-        <span>SHOWMARKET BY ORION.LTD</span>
-        <span className="announcement-separator">/</span>
-        <span className="announcement-message">Showcase untuk produk, ide, dan solusi.</span>
-      </div>
-
-      <header className="site-header">
-        <a className="brand-lockup" href="#home" onClick={closeMenu} aria-label="ORION ShowMarket, ke beranda">
-          <OrbitalMark />
-          <span className="brand-text"><strong>ORION<span>.</span></strong><small>SHOWMARKET</small></span>
-        </a>
-
-        <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={menuOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}>
-          <span /><span /><span />
-        </button>
-
-        <nav className={`main-nav${menuOpen ? ' nav-open' : ''}`} aria-label="Navigasi utama">
-          <a href="#home" onClick={closeMenu}>Beranda</a>
-          <a href="#business" onClick={closeMenu}>Lini Usaha</a>
-          <a href="#partners" onClick={closeMenu}>Sumber Mitra</a>
-          <a href="#how-it-works" onClick={closeMenu}>Cara Kerja</a>
-          <a href="#contact" onClick={closeMenu}>Kontak</a>
-          <button className="theme-toggle" type="button" onClick={() => setLightMode(!lightMode)} aria-label={lightMode ? 'Aktifkan tema gelap' : 'Aktifkan tema terang'} title={lightMode ? 'Tema gelap' : 'Tema terang'}>
-            {lightMode ? <Moon size={16} strokeWidth={1.8} /> : <Sun size={16} strokeWidth={1.8} />}
-          </button>
-          <a className="nav-cta" href="#business" onClick={closeMenu}>Jelajahi <span aria-hidden="true">↗</span></a>
-        </nav>
-      </header>
+      <SiteHeader
+        menuOpen={menuOpen}
+        onMenuToggle={() => setMenuOpen((open) => !open)}
+        onNavigate={closeMenu}
+        lightMode={lightMode}
+        onToggleTheme={() => setLightMode((current) => !current)}
+      />
 
       <main>
         <section className="hero-section" id="home">
@@ -268,11 +227,7 @@ function HomePage() {
         </section>
       </main>
 
-      <footer className="site-footer">
-        <a className="footer-brand" href="#home"><OrbitalMark /><span><strong>ORION<span>.</span></strong><small>THE SKY HUNTER</small></span></a>
-        <p>Raise your creativity. Create your history.</p>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} ORION.Ltd — ShowMarket</span><a href="#home">Kembali ke atas ↑</a><span>Made to explore.</span></div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }
