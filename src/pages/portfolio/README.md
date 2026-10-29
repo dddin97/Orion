@@ -1,2 +1,3 @@
 # Portfolio pages
-Halaman portofolio dan detail proyek direncanakan pada Fase 5. Materi mitra dipakai hanya setelah hak penggunaan atau izin dikonfirmasi.
+
+`PortfolioPage.jsx` dan `ProjectDetailPage.jsx` menyediakan route daftar dan detail proyek. Tidak ada portofolio rekaan; data baru ditampilkan setelah dokumentasi serta izin publikasi dikonfirmasi.

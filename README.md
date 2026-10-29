@@ -13,7 +13,7 @@ Brand line: **The Sky Hunter.**
 
 - React + Vite
 - Tailwind CSS v4 via `@tailwindcss/vite`
-- React Router (dideklarasikan pada entry point; rute halaman disusun pada Fase 4)
+- React Router (routing halaman terpusat pada `src/routes/AppRoutes.jsx`)
 - Lucide React
 - ESLint flat config + Oxlint opsional
 - CSS responsif kustom yang sudah digunakan pada Prototype v1
@@ -65,14 +65,15 @@ docs/
 └── PHASE-3-DESIGN-SYSTEM.md
 ```
 
-Folder sudah disiapkan berdasarkan target arsitektur roadmap. Tidak semua modul diimplementasikan pada fase ini.
+Folder disiapkan dan diisi bertahap berdasarkan roadmap. Fase 4 menambahkan route map, layout bersama, dan template halaman publik.
 
 ## Status roadmap
 
 - **Fase 1 — Perencanaan dan fondasi:** acuan dari brief serta Prototype v1.
 - **Fase 2 — Setup proyek:** React + Vite, Tailwind, React Router, Lucide React, ESLint, dan struktur folder telah dikonfigurasi.
 - **Fase 3 — Design system dan komponen:** tokens, shared header/footer, primitives UI, kartu usaha/produk, dan 20 placeholder media telah disiapkan; lihat `docs/PHASE-3-DESIGN-SYSTEM.md`.
-- Fase 4–10 mengikuti roadmap `Orion Web`.
+- **Fase 4 — Layout dan routing:** `MainLayout`, navigasi route, halaman APP/SND/ASM, katalog/detail, portofolio/detail proyek, tentang, kontak, dan 404 telah disiapkan. Lihat `docs/PHASE-4-ROUTING.md`.
+- Fase 5–10 mengikuti roadmap `Orion Web`.
 
 ## Sumber mitra
 

@@ -1,0 +1,18 @@
+
+#root { width: 100%; min-height: 100vh; }
+.site-shell {
+  min-height: 100vh;
+  overflow: clip;
+  background: var(--bg);
+  color: var(--text);
+  transition: background var(--sm-motion-ui), color var(--sm-motion-ui);
+}
+.site-shell.light-mode {
+  --bg: #f4f2ed;
+  --surface: #ece9e2;
+  --surface-raised: #fff;
+  --text: #121416;
+  --muted: #5c6063;
+  --line: rgb(18 20 22 / 15%);
+  --accent-soft: rgb(255 107 44 / 10%);
+}

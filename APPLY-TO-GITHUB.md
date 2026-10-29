@@ -1,17 +1,35 @@
-# Menerapkan ShowMarket Phase 3 ke repository
+# Menerapkan ShowMarket Phase 4 ke repository
 
-Paket ini merupakan overlay di atas fondasi `Orion_ShowMarket_Phase2_Setup.zip`, bukan clone Git dan tidak berisi folder `.git`.
+Paket Phase 4 adalah overlay di atas fondasi Phase 3. ZIP ini tidak membawa folder `.git` dan tidak melakukan push otomatis.
 
-1. Backup atau commit perubahan lokal Anda terlebih dahulu.
-2. Ekstrak ZIP ke folder sementara. Masuk ke folder hasil ekstrak `orion-project/`, lalu salin **isinya** (bukan folder `orion-project` sebagai subfolder baru) ke root repository Orion lokal. Izinkan file dengan nama sama diperbarui.
-3. Dari root proyek jalankan `npm install`, `npm run lint`, dan `npm run build`.
-4. Periksa beranda pada `npm run dev` di desktop dan layar kecil.
-5. Jika semua pemeriksaan lulus, commit perubahan:
+1. Pastikan semua perubahan yang sudah ada di repository lokal di-commit atau di-backup.
+2. Ekstrak ZIP ke folder sementara. Buka folder `orion-project/`, lalu salin **isinya** ke root repository Orion lokal—jangan membuat folder `orion-project` bersarang. Tinjau diff dan jangan timpa perubahan lokal yang belum di-commit tanpa membandingkannya.
+3. Dari root repository, jalankan:
 
-```bash
-git add .
-git commit -m "feat: add ShowMarket design system and reusable UI kit"
-git push
-```
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-Jika Anda sudah mengubah file yang sama sejak commit Fase 2, jangan timpa tanpa meninjau diff. Bandingkan perubahan di `src/pages/home/HomePage.jsx`, `src/index.css`, dan `README.md` terlebih dahulu.
+4. Uji setiap URL yang tercantum pada `docs/PHASE-4-ROUTING.md`, termasuk detail dinamis `/app/produk/produk-contoh` dan `/portofolio/proyek-contoh`, navigasi header/footer, breadcrumb, tombol kembali, mode tema, dan menu pada layar kecil.
+5. Jalankan pemeriksaan:
+
+   ```bash
+   npm run lint
+   npm run build
+   ```
+
+6. Jika uji lokal lolos, commit dan push:
+
+   ```bash
+   git add .
+   git commit -m "feat: add ShowMarket page layout and routing"
+   git push
+   ```
+
+## Perhatian
+
+- Jangan menghapus atau mengubah folder `.git` repository lokal.
+- Paket tidak menyertakan `node_modules`.
+- Produk, harga, stok, spesifikasi, portofolio, alamat detail, dan nomor WhatsApp lengkap belum ditambahkan tanpa verifikasi.
+- Direct URL pada hosting produksi membutuhkan konfigurasi SPA fallback. Itu dibahas pada Fase 8 deployment.

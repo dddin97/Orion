@@ -160,3 +160,8 @@
   .assembly-visual { min-height: 300px; }.assembly-orbit { width: 230px; height: 230px; }.assembly-copy .button { width: 100%; }.catalog-note-content h2 { font-size: 32px; }.catalog-status-list > div { grid-template-columns: 8px 1fr; gap: 9px; }.catalog-status-list b { grid-column: 2; margin-top: -3px; }.contact-card { padding: 24px 18px; }.contact-copy h2 { font-size: 33px; }.contact-details > div { grid-template-columns: 100px 1fr; gap: 10px; }.contact-details a, .contact-details p { font-size: 10px; }
   .site-footer { padding: 29px 18px 0; }.footer-bottom { flex-wrap: wrap; gap: 10px 14px; font-size: 8px; }.footer-bottom span:last-child { display: none; }
 }
+
+/* Fase 4: keep the expanded public navigation compact on mid-size desktop widths. */
+@media (max-width: 1040px) and (min-width: 821px) { .main-nav { gap: 13px; } .main-nav-link { font-size: 11px !important; } .nav-cta { gap: 8px; padding: 11px 10px; } }
+.main-nav-link.is-active { color: var(--text) !important; }
+.main-nav-link.is-active::after { transform: scaleX(1); }

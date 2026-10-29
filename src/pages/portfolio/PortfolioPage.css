@@ -1,0 +1,9 @@
+
+.portfolio-route { min-height: 420px; display: grid; align-items: start; }
+.portfolio-route__empty { width: min(100%, 720px); padding: clamp(22px, 4vw, 38px); border: 1px solid var(--line); background: var(--surface); }
+.portfolio-route__icon { display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: 23px; border: 1px solid var(--line); color: var(--accent); }
+.portfolio-route__empty .route-eyebrow { margin-bottom: 10px; }
+.portfolio-route__empty h2 { margin: 0; font: 700 clamp(25px, 3.2vw, 38px)/1.12 var(--heading); letter-spacing: -.055em; }
+.portfolio-route__empty > p { margin: 18px 0 22px; color: var(--muted); font-size: 12px; line-height: 1.9; }
+.portfolio-route__empty .sm-status-message { margin-bottom: 24px; }
+.portfolio-route__empty code { overflow-wrap: anywhere; }

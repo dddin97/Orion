@@ -1,9 +1,6 @@
-import HomePage from './pages/home/HomePage.jsx'
 
-/**
- * Root application entry.
- * Shared layout and URL routes will be introduced in Fase 4.
- */
+import AppRoutes from './routes/AppRoutes.jsx'
+
 export default function App() {
-  return <HomePage />
+  return <AppRoutes />
 }

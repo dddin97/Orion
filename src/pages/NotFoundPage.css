@@ -1,0 +1,8 @@
+
+.not-found-route { display: grid; grid-template-columns: 130px minmax(0, 1fr); align-items: start; gap: clamp(25px, 5vw, 60px); min-height: 320px; }
+.not-found-route__mark { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; color: var(--accent); }
+.not-found-route__mark span { font: 800 26px/1 var(--heading); letter-spacing: -.07em; }
+.not-found-route h2 { margin: 0; font: 700 clamp(25px, 3.5vw, 40px)/1.12 var(--heading); letter-spacing: -.06em; }
+.not-found-route p { margin: 18px 0 26px; color: var(--muted); font-size: 12px; }
+.not-found-route code { overflow-wrap: anywhere; }
+@media (max-width: 560px) { .not-found-route { grid-template-columns: 1fr; min-height: 280px; }.not-found-route__mark { flex-direction: row; align-items: center; } }

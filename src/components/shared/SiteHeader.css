@@ -39,3 +39,7 @@
   .brand-text strong { font-size: 18px; }
   .orbital-mark { width: 36px; height: 36px; }
 }
+
+.main-nav-link.is-active { color: var(--text, var(--sm-color-ink)) !important; }
+.main-nav-link.is-active::after { transform: scaleX(1); }
+@media (max-width: 1040px) and (min-width: 821px) { .main-nav { gap: 13px; } .main-nav-link { font-size: 11px !important; } .nav-cta { gap: 8px; padding: 11px 10px; } }

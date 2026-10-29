@@ -1,11 +1,9 @@
+
 import { Moon, Sun } from 'lucide-react'
+import { Link, NavLink } from 'react-router'
 import BrandMark from './BrandMark.jsx'
 import './SiteHeader.css'
 
-/**
- * Shared header for the showroom. Navigation targets are anchors for the current
- * single-page homepage; Phase 4 will convert public destinations to route links.
- */
 export default function SiteHeader({
   menuOpen = false,
   onMenuToggle = () => {},
@@ -14,6 +12,7 @@ export default function SiteHeader({
   onToggleTheme = () => {},
 }) {
   const closeMenu = () => onNavigate()
+  const navClass = ({ isActive }) => `main-nav-link${isActive ? ' is-active' : ''}`
 
   return (
     <>
@@ -25,10 +24,10 @@ export default function SiteHeader({
       </div>
 
       <header className="site-header">
-        <a className="brand-lockup" href="#home" onClick={closeMenu} aria-label="ORION ShowMarket, ke beranda">
+        <Link className="brand-lockup" to="/" onClick={closeMenu} aria-label="ORION ShowMarket, ke beranda">
           <BrandMark />
           <span className="brand-text"><strong>ORION<span>.</span></strong><small>SHOWMARKET</small></span>
-        </a>
+        </Link>
 
         <button
           className="menu-toggle"
@@ -42,11 +41,13 @@ export default function SiteHeader({
         </button>
 
         <nav id="showmarket-primary-navigation" className={`main-nav${menuOpen ? ' nav-open' : ''}`} aria-label="Navigasi utama">
-          <a href="#home" onClick={closeMenu}>Beranda</a>
-          <a href="#business" onClick={closeMenu}>Lini Usaha</a>
-          <a href="#partners" onClick={closeMenu}>Sumber Mitra</a>
-          <a href="#how-it-works" onClick={closeMenu}>Cara Kerja</a>
-          <a href="#contact" onClick={closeMenu}>Kontak</a>
+          <NavLink className={navClass} to="/" end onClick={closeMenu}>Beranda</NavLink>
+          <NavLink className={navClass} to="/app" onClick={closeMenu}>APP</NavLink>
+          <NavLink className={navClass} to="/snd" onClick={closeMenu}>SND</NavLink>
+          <NavLink className={navClass} to="/asm" onClick={closeMenu}>ASM</NavLink>
+          <NavLink className={navClass} to="/portofolio" onClick={closeMenu}>Portofolio</NavLink>
+          <NavLink className={navClass} to="/tentang" onClick={closeMenu}>Tentang</NavLink>
+          <NavLink className={navClass} to="/kontak" onClick={closeMenu}>Kontak</NavLink>
           <button
             className="theme-toggle"
             type="button"
@@ -56,7 +57,7 @@ export default function SiteHeader({
           >
             {lightMode ? <Moon size={16} strokeWidth={1.8} /> : <Sun size={16} strokeWidth={1.8} />}
           </button>
-          <a className="nav-cta" href="#business" onClick={closeMenu}>Jelajahi <span aria-hidden="true">↗</span></a>
+          <Link className="nav-cta" to="/app/katalog" onClick={closeMenu}>Jelajahi katalog <span aria-hidden="true">↗</span></Link>
         </nav>
       </header>
     </>

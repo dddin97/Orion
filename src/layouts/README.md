@@ -1,2 +1,3 @@
 # Layouts
-Kerangka halaman bersama, misalnya `MainLayout` dan `BusinessLayout`. Implementasi layout dilakukan pada Fase 4.
+
+`MainLayout.jsx` menyediakan header/footer, theme state, dan scroll handling bersama untuk seluruh halaman publik. Layout khusus usaha dapat ditambahkan ketika dibutuhkan.

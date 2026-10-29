@@ -1,4 +1,4 @@
-# UI Kit — ShowMarket Phase 3
+# UI Kit — ShowMarket
 
 Semua komponen di folder ini dibuat untuk digunakan ulang. Impor satu komponen langsung atau melalui `src/components/ui/index.js`.
 
@@ -8,7 +8,7 @@ import { Badge, Button, Card, Input, MediaPlaceholder, ProductCard } from '../..
 
 Komponen inti:
 
-- `Button`: `primary`, `secondary`, `ghost`, `danger`; ukuran `sm`, `md` (default), `lg`; opsi `block`, `loading`, `disabled`, `href`.
+- `Button`: `primary`, `secondary`, `ghost`, `danger`; ukuran `sm`, `md` (default), `lg`; opsi `block`, `loading`, `disabled`, `href`. Nilai `href` yang diawali `/` menggunakan navigasi React Router; tautan luar tetap memakai anchor biasa.
 - `Badge`: status `neutral`, `accent`, `success`, `warning`, `danger`, `info`.
 - `Input` dan `Textarea`: label/hint/error yang terhubung dengan elemen input melalui ID dan ARIA.
 - `Card`, `CardHeader`, `CardContent`, `CardFooter`: kerangka kartu serbaguna.
