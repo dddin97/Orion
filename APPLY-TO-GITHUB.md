@@ -1,32 +1,20 @@
-# Cara menerapkan overlay Fase 5
+# Cara menerapkan overlay Fase 6
 
-Paket ini hanya berisi file overlay yang perlu ditambahkan/diganti, bukan clone penuh repository. Satu pengecualian adalah `src/App.jsx`: versi branch publik yang berhasil diperiksa masih merender `HomePage` langsung, sehingga file ini diperbarui untuk menggunakan `AppRoutes` dan mengaktifkan routing.
+Paket ini hanya berisi file baru dan file yang perlu diganti; bukan salinan penuh repository.
 
-1. Pastikan Fase 4 sudah di-commit dan working tree Git Anda bersih (`git status`).
-2. Unduh dan ekstrak ZIP ini di folder sementara.
-3. Salin isi folder `orion-project` ke root clone repository Orion Anda. Overlay ini tidak menyertakan `.git`, `package.json`, `package-lock.json`, `main.jsx`, `AppRoutes.jsx`, layout, navbar/footer, atau halaman beranda.
-4. Tinjau perubahan dengan `git diff --stat` dan `git diff` sebelum menguji.
-5. Jalankan:
-
-```bash
-npm install
-npm run dev
-```
-
-6. Uji URL dan alur pada `docs/PHASE-5-SHOWROOM.md`.
-7. Jalankan pemeriksaan:
-
-```bash
-npm run lint
-npm run build
-```
-
-8. Jika semuanya lolos, commit dan push:
+1. Pastikan Fase 5 sudah commit dan `git status` bersih pada clone lokal `dddin97/Orion`.
+2. Unduh ZIP ini dan ekstrak ke folder sementara.
+3. Masuk ke folder `orion-project` di dalam ZIP.
+4. Salin folder `src` dan `docs` serta file `PHASE-6-CHANGELOG.md` ini ke root repository lokal. Gabungkan folder; jangan membuat folder `orion-project` bersarang. Tinjau diff sebelum menimpa file lokal yang pernah Anda edit sendiri.
+5. Jalankan `npm install` hanya jika dependency lokal belum terpasang; paket Fase 6 tidak menambahkan dependency baru.
+6. Jalankan `npm run dev`, lalu uji semua langkah dalam `docs/PHASE-6-INTERACTIONS.md`.
+7. Jalankan `npm run lint` dan `npm run build`. Perbaiki error lokal sebelum commit.
+8. Setelah lolos, commit dan push:
 
 ```bash
 git add .
-git commit -m "feat: complete ShowMarket public showroom pages"
+git commit -m "feat: add ShowMarket frontend interactions"
 git push
 ```
 
-Jika ada perubahan lokal pada file yang sama, gabungkan secara manual terlebih dahulu; jangan langsung menimpa tanpa meninjau diff.
+Jika file lokal berbeda dari overlay, jangan menimpa secara membabi buta: gunakan diff/merge agar perubahan yang sudah Anda buat tetap dipertahankan.

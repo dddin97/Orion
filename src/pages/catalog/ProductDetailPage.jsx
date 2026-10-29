@@ -1,45 +1,141 @@
-import { ArrowLeft, ArrowRight, AudioLines, CircleHelp, Package, Shirt, Wrench } from 'lucide-react'
-import { Link, useParams } from 'react-router'
+import { useState } from 'react'
+import { ArrowLeft, ArrowUpRight, ImagePlus, Play, ZoomIn } from 'lucide-react'
+import { useParams } from 'react-router'
 import PageIntro from '../../components/shared/PageIntro.jsx'
+import { Button, MediaPlaceholder, Modal, ProductCard, StatusMessage } from '../../components/ui/index.js'
 import { getBusiness } from '../../data/businesses.js'
-import { catalogContent, getCatalogEntry } from '../../data/showroomContent.js'
-import '../../styles/phase-5-showroom.css'
+import { getCatalogItem, getCatalogItemsForBusiness, getCatalogItemHref } from '../../data/catalogItems.js'
+import './CatalogPage.css'
 
-const artIcons = { apparel: Shirt, audio: AudioLines, assembly: Wrench, custom: Package }
+function buildGallery(item, isService) {
+  const kind = isService ? 'portfolio' : 'product'
+  return [
+    { id: 'primary', ratio: '1:1', type: kind, label: item.galleryLabel || 'Slot media utama', title: 'Media utama' },
+    { id: 'support', ratio: '3:2', type: 'image', label: 'Placeholder foto pendukung', title: 'Foto pendukung' },
+    { id: 'video', ratio: '16:9', type: 'video', label: 'Slot video belum tersedia', title: 'Video' },
+  ]
+}
 
 export default function ProductDetailPage({ businessId }) {
   const { slug } = useParams()
   const business = getBusiness(businessId)
+  const item = getCatalogItem(businessId, slug)
+  const isService = businessId === 'asm' || item?.statusLabel === 'Preview layanan'
+  const [galleryState, setGalleryState] = useState({ slug: null, index: 0, open: false })
+  const gallery = item ? buildGallery(item, isService) : []
+  const activeMediaIndex = galleryState.slug === slug ? galleryState.index : 0
+  const galleryOpen = galleryState.slug === slug && galleryState.open
+  const activeMedia = gallery[activeMediaIndex]
+  const relatedItems = getCatalogItemsForBusiness(businessId).filter((entry) => entry.slug !== slug).slice(0, 3)
+
   if (!business) return null
-  const isAsm = businessId === 'asm'
-  const entry = getCatalogEntry(businessId, slug)
-  const basePath = business.catalogPath
-  const itemLabel = isAsm ? 'layanan' : 'produk'
-  if (!entry) {
-    return <main className="sm5-page"><PageIntro eyebrow={`${business.code} / DETAIL`} title={`${isAsm ? 'Layanan' : 'Item'} belum ditemukan.`} description="Alamat detail dikenali oleh sistem, tetapi belum terhubung ke konten kategori atau item yang disiapkan." code="CONTENT / NOT FOUND" breadcrumbs={[{ label: business.name, href: `/${businessId}` }, { label: isAsm ? 'Layanan' : 'Katalog', href: basePath }, { label: 'Detail' }]} /><section className="sm5-container sm5-section"><div className="sm5-empty-state"><CircleHelp size={34} aria-hidden="true" /><h2>Belum ada konten untuk alamat ini.</h2><p>Periksa kembali tautan atau kembali ke daftar kategori. Data model dan spesifikasi tidak dibuat secara otomatis.</p><Link className="sm5-button sm5-button--primary" to={basePath}><ArrowLeft size={16} aria-hidden="true" />Kembali ke {isAsm ? 'layanan' : 'katalog'}</Link></div></section></main>
+
+  if (!item) {
+    return (
+      <main>
+        <PageIntro
+          eyebrow={`${business.code} / ${isService ? 'SERVICE DETAIL' : 'DETAIL'}`}
+          title="Konten belum tersedia."
+          description="Alamat detail ini belum terhubung ke entri kategori lokal yang dikenali oleh ShowMarket."
+          code={String(slug || 'ITEM').toUpperCase().slice(0, 18)}
+          breadcrumbs={[{ label: business.name, href: `/${business.id}` }, { label: isService ? 'Layanan' : 'Katalog', href: business.catalogPath }, { label: 'Detail' }]}
+        />
+        <section className="route-section route-container product-detail-route">
+          <StatusMessage variant="info" title="Entri tidak ditemukan">Tidak ada kategori atau layanan dengan kode URL <code>{slug}</code>.</StatusMessage>
+          <div className="route-actions"><Button href={business.catalogPath} variant="secondary"><ArrowLeft size={15} aria-hidden="true" /> Kembali ke {isService ? 'layanan' : 'katalog'}</Button></div>
+        </section>
+      </main>
+    )
   }
-  const Icon = artIcons[entry.icon] || Package
+
+  const inquiryHref = `/kontak?bidang=${encodeURIComponent(businessId)}&item=${encodeURIComponent(item.slug)}`
+
   return (
-    <main className="sm5-page sm5-detail">
+    <main>
       <PageIntro
-        eyebrow={`${business.code} / ${isAsm ? 'SERVICE PREVIEW' : 'CATEGORY PREVIEW'}`}
-        title={entry.title}
-        description={entry.description}
-        code={`${business.code} / DETAIL`}
-        note="Contoh tampilan detail untuk pengembangan frontend."
-        breadcrumbs={[{ label: business.name, href: `/${businessId}` }, { label: isAsm ? 'Layanan' : 'Katalog', href: basePath }, { label: entry.title }]}
+        eyebrow={`${business.code} / ${isService ? 'SERVICE PREVIEW' : 'CATEGORY PREVIEW'}`}
+        title={item.name}
+        description={item.description}
+        code={String(item.slug).toUpperCase().slice(0, 18)}
+        note="Pratinjau antarmuka — bukan daftar produk atau penawaran final."
+        breadcrumbs={[{ label: business.name, href: `/${business.id}` }, { label: isService ? 'Layanan' : 'Katalog', href: business.catalogPath }, { label: item.name }]}
       />
-      <section className="sm5-container sm5-section">
-        <div className="sm5-detail-grid">
-          <div className="sm5-detail-art"><span className="sm5-detail-art__corner">{business.code} / PREVIEW</span><Icon size={76} strokeWidth={1.1} aria-hidden="true" /><span className="sm5-detail-art__caption">MEDIA PLACEHOLDER<br />BUKAN FOTO PRODUK AKTUAL</span></div>
-          <div className="sm5-detail-copy"><span className="sm5-status-label">{isAsm ? 'CONTOH STRUKTUR LAYANAN' : 'KATEGORI CONTOH — BUKAN SKU'}</span><h2>{isAsm ? 'Rincian ditentukan melalui konsultasi.' : 'Informasi item akan dilengkapi setelah verifikasi.'}</h2><p>{entry.details}</p>
-            <div className="sm5-detail-facts"><div><span>{isAsm ? 'Ruang lingkup' : 'Model / varian'}</span><strong>{isAsm ? 'Dikonfirmasi saat diskusi' : 'Belum diverifikasi'}</strong></div><div><span>{isAsm ? 'Estimasi biaya' : 'Spesifikasi'}</span><strong>Belum dipublikasikan</strong></div><div><span>{isAsm ? 'Jadwal' : 'Harga jual ORION'}</span><strong>Perlu konfirmasi</strong></div><div><span>{isAsm ? 'Status pemesanan' : 'Ketersediaan'}</span><strong>Belum dikonfirmasi</strong></div></div>
-            <div className="sm5-actions"><a className="sm5-button sm5-button--primary" href={`mailto:orion.ltd@gmail.com?subject=${encodeURIComponent(`Pertanyaan ${business.code} - ${entry.title}`)}&body=${encodeURIComponent(`Halo ORION, saya ingin bertanya mengenai ${entry.title}. Mohon informasi lebih lanjut setelah detailnya tersedia.`)}`}>Tanyakan melalui email <ArrowRight size={16} aria-hidden="true" /></a><Link className="sm5-button sm5-button--secondary" to={basePath}><ArrowLeft size={16} aria-hidden="true" />Kembali ke daftar</Link></div>
-            <p className="sm5-footnote">Label dan ilustrasi di halaman ini hanya menunjukkan struktur UI. Tidak ada klaim bahwa produk atau layanan tertentu sedang tersedia untuk dipesan.</p>
+
+      <section className="route-section route-container product-detail-route">
+        <div className="product-detail-route__grid">
+          <div>
+            <div className="product-detail-route__gallery" aria-label="Galeri media pratinjau">
+              {gallery.map((media, index) => (
+                <button
+                  type="button"
+                  key={media.id}
+                  className={`product-detail-route__gallery-item${index === 0 ? ' product-detail-route__gallery-main' : ''}`}
+                  onClick={() => setGalleryState({ slug, index, open: true })}
+                  aria-label={`Buka ${media.title}: ${media.label}`}
+                >
+                  <MediaPlaceholder aspectRatio={media.ratio} type={media.type} label={media.label} caption="PLACEHOLDER / BELUM ADA ASET TERKONFIRMASI" />
+                  <span className="product-detail-route__gallery-item-label">
+                    <span>{media.title}</span>{media.type === 'video' ? <Play size={13} aria-hidden="true" /> : <ZoomIn size={13} aria-hidden="true" />}
+                  </span>
+                </button>
+              ))}
+            </div>
+            <p className="catalog-route__small-note">Galeri ini menunjukkan interaksi media. Placeholder bukan foto produk atau dokumentasi pekerjaan yang sebenarnya.</p>
+          </div>
+
+          <div className="product-detail-route__copy">
+            <span className="product-detail-route__label"><ImagePlus size={14} aria-hidden="true" /> {isService ? 'Pratinjau layanan' : 'Pratinjau kategori'}</span>
+            <h2>{isService ? 'Ruang lingkup dibahas saat konsultasi.' : 'Detail produk akan dilengkapi setelah verifikasi.'}</h2>
+            <p>{isService
+              ? 'Kebutuhan, lokasi, konfigurasi, komponen, jadwal, dan estimasi biaya perlu dibahas dahulu. Halaman ini belum menjadi paket layanan atau penawaran resmi.'
+              : 'Entri ini mewakili kategori produk, bukan model tertentu. Spesifikasi teknis, harga jual ORION, ketersediaan, dan media akan diisi setelah sumber serta izin publikasi diperiksa.'}</p>
+
+            <div className="product-detail-route__facts">
+              <div className="product-detail-route__fact"><span>Status data</span><strong>Pratinjau lokal</strong></div>
+              <div className="product-detail-route__fact"><span>{isService ? 'Harga layanan' : 'Harga produk'}</span><strong>Belum dikonfirmasi</strong></div>
+              <div className="product-detail-route__fact"><span>{isService ? 'Ruang lingkup' : 'Model / spesifikasi'}</span><strong>Perlu verifikasi</strong></div>
+              <div className="product-detail-route__fact"><span>Media</span><strong>Placeholder sementara</strong></div>
+            </div>
+
+            {item.partnerReferences?.length > 0 && (
+              <p className="catalog-route__small-note">Referensi mitra pada brief: {item.partnerReferences.join(', ')}. Daftar ini bukan konfirmasi ketersediaan produk tertentu atau izin penggunaan foto.</p>
+            )}
+            <div className="route-actions">
+              <Button href={business.catalogPath} variant="secondary"><ArrowLeft size={15} aria-hidden="true" /> Kembali ke {isService ? 'layanan' : 'katalog'}</Button>
+              <Button href={inquiryHref}>Tanyakan kebutuhan <ArrowUpRight size={15} aria-hidden="true" /></Button>
+            </div>
           </div>
         </div>
-        <div className="sm5-related"><div><span className="sm5-eyebrow">RELATED / {business.code}</span><h2>Kembali menjelajahi {isAsm ? 'layanan' : 'kategori'}.</h2></div><div className="sm5-related-links">{catalogContent[businessId].filter((item) => item.slug !== entry.slug).map((item) => <Link to={`/${businessId}/${isAsm ? 'layanan' : 'produk'}/${item.slug}`} key={item.slug}>{item.title}<ArrowRight size={14} aria-hidden="true" /></Link>)}</div></div>
+
+        {relatedItems.length > 0 && (
+          <section className="product-detail-route__related" aria-labelledby="related-categories-title">
+            <div className="product-detail-route__related-heading">
+              <div><span className="route-eyebrow">JELAJAHI / {business.code}</span><h2 id="related-categories-title">Kategori lainnya.</h2></div>
+              <Button href={business.catalogPath} variant="ghost" size="sm">Lihat semua <ArrowUpRight size={14} aria-hidden="true" /></Button>
+            </div>
+            <div className="product-detail-route__related-grid">
+              {relatedItems.map((related) => (
+                <ProductCard key={related.id} product={{ ...related, imageLabel: 'Placeholder media — foto aktual belum tersedia', imageAlt: 'Placeholder media; bukan foto produk aktual' }} href={getCatalogItemHref(businessId, related)} showPrice={false} actionLabel={isService ? 'Lihat layanan' : 'Lihat kategori'} className="phase6-product-card" />
+              ))}
+            </div>
+          </section>
+        )}
       </section>
+
+      <Modal
+        isOpen={galleryOpen}
+        onClose={() => setGalleryState((current) => ({ ...current, open: false }))}
+        title={activeMedia?.title || 'Media pratinjau'}
+        description={activeMedia?.label || 'Placeholder media'}
+        className="phase6-gallery-modal"
+      >
+        {activeMedia && (
+          <div className="phase6-gallery-modal__media">
+            <MediaPlaceholder aspectRatio={activeMedia.ratio} type={activeMedia.type} label={activeMedia.label} caption="PLACEHOLDER / BELUM ADA ASET TERKONFIRMASI" />
+            <p className="phase6-gallery-modal__note">Media ini hanya placeholder lokal untuk menguji modal galeri. Ganti dengan foto/video yang sudah diverifikasi dan diizinkan untuk dipublikasikan.</p>
+          </div>
+        )}
+      </Modal>
     </main>
   )
 }

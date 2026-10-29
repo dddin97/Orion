@@ -1,0 +1,28 @@
+/* Fase 6 interaction refinements. Global reduce-motion support is also defined in index.css. */
+.contact-route__inquiry { grid-column: 1 / -1; min-width: 0; }
+.contact-route__notice { grid-column: 1 / -1; }
+
+.site-shell .sm-button,
+.site-shell .sm-input,
+.site-shell .sm-textarea,
+.site-shell .sm-chip,
+.site-shell .sm-modal { transition-duration: var(--sm-motion-fast, 180ms); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-shell main > .route-intro + .route-section { animation: phase6-section-arrive 280ms ease-out both; }
+  .site-shell .sm-button:active:not(:disabled):not([aria-disabled="true"]) { transform: translateY(0) scale(.985); }
+  .inquiry-preview { animation: phase6-section-arrive 260ms ease-out both; }
+  @keyframes phase6-section-arrive { from { opacity: 0; } to { opacity: 1; } }
+}
+
+@media (max-width: 820px) {
+  .contact-route__inquiry, .contact-route__notice { grid-column: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-shell .sm-button,
+  .site-shell .sm-input,
+  .site-shell .sm-textarea,
+  .site-shell .sm-chip,
+  .site-shell .sm-modal { transition: none !important; }
+}
