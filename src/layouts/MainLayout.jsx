@@ -2,18 +2,8 @@ import { useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import SiteHeader from '../components/shared/SiteHeader.jsx'
 import SiteFooter from '../components/shared/SiteFooter.jsx'
+import PageMetadata from '../components/shared/PageMetadata.jsx'
 import './MainLayout.css'
-import '../styles/phase-6-interactions.css'
-
-const THEME_KEY = 'showmarket-theme'
-
-function readInitialTheme() {
-  try {
-    return window.localStorage.getItem(THEME_KEY) === 'light'
-  } catch {
-    return false
-  }
-}
 
 function ScrollManager() {
   const location = useLocation()
@@ -30,21 +20,32 @@ function ScrollManager() {
   return null
 }
 
+function readSavedTheme() {
+  try {
+    return window.localStorage.getItem('orion-showmarket-theme') === 'light'
+  } catch {
+    return false
+  }
+}
+
 export default function MainLayout() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [lightMode, setLightMode] = useState(readInitialTheme)
+  const [lightMode, setLightMode] = useState(readSavedTheme)
 
   useEffect(() => {
     try {
-      window.localStorage.setItem(THEME_KEY, lightMode ? 'light' : 'dark')
+      window.localStorage.setItem('orion-showmarket-theme', lightMode ? 'light' : 'dark')
     } catch {
-      // Theme still works for the current session if browser storage is blocked.
+      // Theme remains usable when browser storage is disabled.
     }
+    document.documentElement.style.colorScheme = lightMode ? 'light' : 'dark'
   }, [lightMode])
 
   return (
-    <div id="showmarket-top" className={`site-shell${lightMode ? ' light-mode' : ''}`} data-theme={lightMode ? 'light' : 'dark'}>
+    <div id="showmarket-top" className={`site-shell${lightMode ? ' light-mode' : ''}`}>
+      <PageMetadata />
       <ScrollManager />
+      <a className="skip-link" href="#main-content">Lewati ke konten utama</a>
       <SiteHeader
         menuOpen={menuOpen}
         onMenuToggle={() => setMenuOpen((open) => !open)}
@@ -52,7 +53,9 @@ export default function MainLayout() {
         lightMode={lightMode}
         onToggleTheme={() => setLightMode((current) => !current)}
       />
-      <Outlet />
+      <div id="main-content" className="site-content" tabIndex="-1">
+        <Outlet />
+      </div>
       <SiteFooter />
     </div>
   )

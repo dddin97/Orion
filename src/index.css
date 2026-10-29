@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./styles/tokens.css";
+@import "./styles/phase-7-quality.css";
 :root {
   font-family: 'DM Sans', Arial, sans-serif;
   color: #f5f4f0;
@@ -26,7 +27,6 @@
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
-
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; background: var(--bg); }
 button, a { font: inherit; }
@@ -34,7 +34,6 @@ button { cursor: pointer; }
 a { color: inherit; text-decoration: none; }
 button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 ::selection { color: #fff; background: #b8471d; }
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

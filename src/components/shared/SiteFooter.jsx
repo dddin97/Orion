@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router'
 import BrandMark from './BrandMark.jsx'
 import './SiteFooter.css'
@@ -11,6 +10,11 @@ export default function SiteFooter({ year = new Date().getFullYear() }) {
         <span><strong>ORION<span>.</span></strong><small>THE SKY HUNTER</small></span>
       </Link>
       <p>Raise your creativity. Create your history.</p>
+      <nav className="footer-legal-links" aria-label="Informasi hukum">
+        <Link to="/kebijakan-privasi">Kebijakan Privasi</Link>
+        <Link to="/syarat-penggunaan">Syarat Penggunaan</Link>
+        <Link to="/kontak">Kontak</Link>
+      </nav>
       <div className="footer-bottom">
         <span>© {year} ORION.Ltd — ShowMarket</span>
         <a href="#showmarket-top">Kembali ke atas ↑</a>

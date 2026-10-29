@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Sitemap URL sengaja belum dicantumkan karena domain produksi ShowMarket belum ditetapkan.
+# Setelah domain resmi dikonfirmasi, buat sitemap.xml dengan scripts/generate-sitemap.mjs,
+# lalu tambahkan baris: Sitemap: https://domain-anda-yang-sebenarnya/sitemap.xml
